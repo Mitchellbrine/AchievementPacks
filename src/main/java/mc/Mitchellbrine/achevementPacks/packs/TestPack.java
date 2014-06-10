@@ -27,7 +27,7 @@ public class TestPack {
         stone = new SmeltingAchievement(new ItemStack(Blocks.stone),"stone","stone",0,4,new ItemStack(Blocks.stone),null).initIndependentStat().registerStat();
         pig = new KillAchievement("Pig","pig","pig",0,6,new ItemStack(Items.porkchop),null).initIndependentStat().registerStat();
 
-        test = new AchievementPack("Getting Started","1.0","https://dl.dropboxusercontent.com/u/133619815/WeatherCarpetsStable.txt",new Achievement[]{pickupIronIngot,wood,stone,pig});
+        test = new AchievementPack("Getting Started","1.0","https://dl.dropboxusercontent.com/u/133619815/gettingStarted.txt",new Achievement[]{pickupIronIngot,wood,stone,pig});
 
     }
 
