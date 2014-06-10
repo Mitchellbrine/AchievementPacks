@@ -46,6 +46,7 @@ public class AchievementPack extends AchievementPage{
             updateFile.close();
 
             if (!currentVersion.contains(this.packVersion)) {
+                AchievementPacksMain.outdatedVersions.add(currentVersion);
                 return true;
             } else {
                 return false;

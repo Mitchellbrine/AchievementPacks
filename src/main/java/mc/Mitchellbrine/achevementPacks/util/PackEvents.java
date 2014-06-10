@@ -18,7 +18,7 @@ public class PackEvents {
                     if (!AchievementPacksMain.outdatedPacks.isEmpty()) {
                         player.addChatMessage(new ChatComponentText("[Achievement Packs] The following packs are outdated: "));
                         for (int pack = 0; pack < AchievementPacksMain.outdatedPacks.size();pack++) {
-                            player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + AchievementPacksMain.outdatedPacks.get(pack)));
+                            player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + AchievementPacksMain.outdatedPacks.get(pack) + " - " + AchievementPacksMain.outdatedVersions.get(pack)));
                         }
                         if (!AchievementPacksMain.erroredPacks.isEmpty()) {
                             player.addChatMessage(new ChatComponentText(""));

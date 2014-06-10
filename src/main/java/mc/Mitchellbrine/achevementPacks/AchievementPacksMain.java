@@ -23,6 +23,7 @@ public class AchievementPacksMain {
     public static Logger logger;
 
     public static ArrayList<String> outdatedPacks = new ArrayList<String>();
+    public static ArrayList<String> outdatedVersions = new ArrayList<String>();
     public static ArrayList<String> erroredPacks = new ArrayList<String>();
     public static ArrayList<AchievementPack> packs = new ArrayList<AchievementPack>();
 
