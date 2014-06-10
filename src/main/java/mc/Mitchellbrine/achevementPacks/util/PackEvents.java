@@ -20,6 +20,11 @@ public class PackEvents {
                         for (int pack = 0; pack < AchievementPacksMain.outdatedPacks.size();pack++) {
                             player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + AchievementPacksMain.outdatedPacks.get(pack)));
                         }
+                        player.addChatMessage(new ChatComponentText(""));
+                        player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "[Achievement Packs] The following packs had errors reaching their updater:"));
+                        for (int pack = 0; pack < AchievementPacksMain.erroredPacks.size();pack++) {
+                            player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "" + EnumChatFormatting.ITALIC + AchievementPacksMain.erroredPacks.get(pack)));
+                        }
                     }
                 }
             }

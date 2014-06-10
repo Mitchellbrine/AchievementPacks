@@ -9,6 +9,7 @@ import net.minecraftforge.common.AchievementPage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AchievementPack extends AchievementPage{
@@ -30,21 +31,27 @@ public class AchievementPack extends AchievementPage{
                 AchievementPacksMain.outdatedPacks.add(this.packName);
             }
         } catch (IOException ex) {
+            AchievementPacksMain.erroredPacks.add(this.packName);
             ex.printStackTrace();
         }
     }
 
     private boolean isOutdated() throws IOException{
-        BufferedReader updateFile = new BufferedReader(new InputStreamReader(new URL(updateURL).openStream()));
-        String currentVersion = updateFile.readLine();
-        updateFile.close();
+        BufferedReader updateFile = null;
+        if (this.updateURL != null) {
+            updateFile = new BufferedReader(new InputStreamReader(new URL(this.updateURL).openStream()));
+        }
+        if (updateFile != null) {
+            String currentVersion = updateFile.readLine();
+            updateFile.close();
 
-        if (!this.updateURL.contains(currentVersion)) {
-            return true;
+            if (!currentVersion.contains(this.packVersion)) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public static void finalizePack(AchievementPack pack) {
