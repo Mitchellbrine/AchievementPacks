@@ -52,14 +52,12 @@ public class AchievementPack extends AchievementPage{
     public static Achievement registerAchievement(Achievement ach) {
         if (ach instanceof CraftingAchievement) {
             AchievementPacksMain.craftingAchievements.add(ach);
-            AchievementPacksMain.logger.info("Achievement Item: " + ((CraftingAchievement) ach).getEventItem());
         }
         else if (ach instanceof SmeltingAchievement) {
             AchievementPacksMain.smeltingAchievements.add(ach);
         }
         else if (ach instanceof PickupAchievement) {
             AchievementPacksMain.pickupAchievements.add(ach);
-            AchievementPacksMain.logger.info("Achievement Item: " + ((PickupAchievement) ach).getEventItem());
         }
         return ach;
     }

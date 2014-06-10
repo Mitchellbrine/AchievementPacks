@@ -21,18 +21,6 @@ public class AchievementEvents {
                 if (event.crafting != null && ach.getEventItem() != null && event.crafting.getItem() == ach.getEventItem().getItem()) {
                     event.player.addStat(ach,1);
                 }
-                else if (event.crafting == null) {
-                    AchievementPacksMain.logger.warn("The event is null!");
-                }
-                else if (ach.getEventItem() == null) {
-                    AchievementPacksMain.logger.warn("The achievement's item is null!");
-                }
-                else if (event.crafting.getItem() != ach.getEventItem().getItem()) {
-                    ErrorMessages.compareError(ach.getEventItem(),event.crafting);
-                }
-            }
-            else {
-                AchievementPacksMain.logger.warn("Achievement registered is not Crafting Achievement!");
             }
         }
 
@@ -46,20 +34,10 @@ public class AchievementEvents {
                     SmeltingAchievement ach = (SmeltingAchievement) AchievementPacksMain.smeltingAchievements.get(i);
                     if (event.smelting != null && ach.getEventItem() != null && event.smelting.getItem() == ach.getEventItem().getItem()) {
                         event.player.addStat(ach, 1);
-                    } else if (event.smelting == null) {
-                        AchievementPacksMain.logger.warn("Event's item == null");
-                    } else if (ach.getEventItem() == null) {
-                        AchievementPacksMain.logger.warn("Achievement's Item == null");
-                    } else if (event.smelting.getItem() != ach.getEventItem().getItem()) {
-                        ErrorMessages.compareError(ach.getEventItem().getItem(), event.smelting.getItem());
                     }
-                } else {
-                    AchievementPacksMain.logger.warn("Achievement registered is not Smelting Achievement!");
                 }
             }
-            else {
-                AchievementPacksMain.logger.warn("Achievement == null");
-            }
+
         }
     }
 
