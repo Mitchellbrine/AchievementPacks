@@ -39,14 +39,15 @@ public class AchievementPack extends AchievementPage{
     private boolean isOutdated() throws IOException{
         BufferedReader updateFile = null;
         if (this.updateURL != null) {
-            updateFile = new BufferedReader(new InputStreamReader(new URL(this.updateURL).openStream()));
+            updateFile = new BufferedReader(new InputStreamReader(new URL(this.getUpdateURL()).openStream()));
         }
         if (updateFile != null) {
             String currentVersion = updateFile.readLine();
             updateFile.close();
 
-            if (!currentVersion.contains(this.packVersion)) {
+            if (currentVersion.compareToIgnoreCase(this.packVersion) != 0) {
                 AchievementPacksMain.outdatedVersions.add(currentVersion);
+                AchievementPacksMain.logger.info("New version of " + this.packName + ": " + currentVersion);
                 return true;
             } else {
                 return false;
@@ -79,6 +80,10 @@ public class AchievementPack extends AchievementPage{
             } catch (Exception e) {}
         }
         return ach;
+    }
+
+    public String getUpdateURL() {
+        return this.updateURL;
     }
 
 }
