@@ -26,7 +26,7 @@ public class MitchellbrinePicks {
         waste = new CraftingAchievement(Items.diamond_hoe,"waste","waste",2,6,new ItemStack(Items.diamond_hoe),solla).registerStat();
         possible = new CraftingAchievement(Items.speckled_melon,"possible","possible",2,8,new ItemStack(Items.speckled_melon),solla).registerStat();
 
-        mBrine = new AchievementPack("MBrine's Picks","1.0","https://github.com/Mitchellbrine/AchievementPacks/blob/master/version.properties",new Achievement[]{solla,goldenTicket,rich,yopp,waste,possible});
+        mBrine = new AchievementPack("MBrine's Picks","1.0","https://github.com/Mitchellbrine/AchievementPacks/blob/master/packs/mBrinePack.txt",new Achievement[]{solla,goldenTicket,rich,yopp,waste,possible});
 
     }
 
