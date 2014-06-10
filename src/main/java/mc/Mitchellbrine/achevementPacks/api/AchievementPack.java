@@ -1,6 +1,8 @@
 package mc.Mitchellbrine.achevementPacks.api;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import mc.Mitchellbrine.achevementPacks.AchievementPacksMain;
+import mc.Mitchellbrine.achevementPacks.util.InvalidAchievementException;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
@@ -37,7 +39,7 @@ public class AchievementPack extends AchievementPage{
         String currentVersion = updateFile.readLine();
         updateFile.close();
 
-        if (this.updateURL != currentVersion) {
+        if (!this.updateURL.contains(currentVersion)) {
             return true;
         }
         else {
@@ -46,6 +48,9 @@ public class AchievementPack extends AchievementPage{
     }
 
     public static void finalizePack(AchievementPack pack) {
+        for (Achievement ach : pack.getAchievements()) {
+            AchievementPack.registerAchievement(ach);
+        }
         AchievementPage.registerAchievementPage(pack);
     }
 
@@ -58,6 +63,12 @@ public class AchievementPack extends AchievementPage{
         }
         else if (ach instanceof PickupAchievement) {
             AchievementPacksMain.pickupAchievements.add(ach);
+        } else if (ach instanceof KillAchievement) {
+            AchievementPacksMain.killAchievements.add(ach);
+        } else {
+            try {
+                throw new InvalidAchievementException();
+            } catch (Exception e) {}
         }
         return ach;
     }

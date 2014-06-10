@@ -1,7 +1,27 @@
+// Starting Out
+
 achievement.iron=Picking Up the Mod
 achievement.wood=Time to PLANK!
 achievement.stone=Smooth Testing!
+achievement.pig=From Sword to Porkchop
 
 achievement.iron.desc=Pick up an iron ingot!
 achievement.wood.desc=Craft wood planks!
 achievement.stone.desc=Smelt cobble into a stone!
+achievement.pig.desc=Kill a pig!
+
+// MBrine's Picks
+
+achievement.solla=Solla Sollew
+achievement.goldenTicket=We got a Golden Ticket!
+achievement.rich=We're RICH!
+achievement.yopp=Yopp
+achievement.waste=Waste of Diamonds
+achievement.possible=Anything's Possible
+
+achievement.solla.desc=Create a bed
+achievement.goldenTicket.desc=Craft a gold block
+achievement.rich.desc=Craft a diamond block
+achievement.yopp.desc=Make some tunes!
+achievement.waste.desc=Do I need to tell you?
+achievement.possible.desc=Enchant a melon

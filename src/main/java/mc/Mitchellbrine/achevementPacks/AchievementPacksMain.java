@@ -5,24 +5,17 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mc.Mitchellbrine.achevementPacks.api.AchievementPack;
-import mc.Mitchellbrine.achevementPacks.api.CraftingAchievement;
-import mc.Mitchellbrine.achevementPacks.api.PickupAchievement;
-import mc.Mitchellbrine.achevementPacks.api.SmeltingAchievement;
 import mc.Mitchellbrine.achevementPacks.event.AchievementEvents;
 import mc.Mitchellbrine.achevementPacks.packs.MitchellbrinePicks;
 import mc.Mitchellbrine.achevementPacks.packs.TestPack;
 import mc.Mitchellbrine.achevementPacks.util.PackEvents;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Mod(modid = "AchievementPacks", name = "Achievement Packs", version = "1.0")
 public class AchievementPacksMain {
@@ -32,14 +25,16 @@ public class AchievementPacksMain {
     public static ArrayList<String> outdatedPacks = new ArrayList<String>();
     public static ArrayList<AchievementPack> packs = new ArrayList<AchievementPack>();
 
-    public static HashMap<Achievement, ItemStack> craftingHashMap = new HashMap<Achievement, ItemStack>();
     public static ArrayList<Achievement> craftingAchievements = new ArrayList<Achievement>();
 
-    public static HashMap<Achievement, ItemStack> smeltingHashMap = new HashMap<Achievement, ItemStack>();
     public static ArrayList<Achievement> smeltingAchievements = new ArrayList<Achievement>();
 
-    public static HashMap<Achievement, Item> pickupHashMap = new HashMap<Achievement, Item>();
     public static ArrayList<Achievement> pickupAchievements = new ArrayList<Achievement>();
+
+    public static ArrayList<Achievement> killAchievements = new ArrayList<Achievement>();
+
+    private boolean initTest;
+    private boolean initMBrine;
 
     public AchievementPacksMain(){
         MinecraftForge.EVENT_BUS.register(new PackEvents());
@@ -49,8 +44,22 @@ public class AchievementPacksMain {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
 
-        TestPack.init();
-        MitchellbrinePicks.init();
+        Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + "/AchievementPacks/main.txt"));
+
+        config.load();
+
+        initTest = config.get("packs","Add Test Pack?",true).getBoolean(true);
+        initMBrine = config.get("packs","Add MBrine's Picks?",true).getBoolean(true);
+
+        config.save();
+
+        if (initTest == true) {
+            TestPack.init();
+        }
+
+        if (initMBrine == true) {
+            MitchellbrinePicks.init();
+        }
 
     }
 
@@ -67,6 +76,7 @@ public class AchievementPacksMain {
         }
 
         FMLCommonHandler.instance().bus().register(new AchievementEvents());
+        MinecraftForge.EVENT_BUS.register(new AchievementEvents());
 
     }
 

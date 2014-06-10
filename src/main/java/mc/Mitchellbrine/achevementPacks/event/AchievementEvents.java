@@ -3,12 +3,12 @@ package mc.Mitchellbrine.achevementPacks.event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import mc.Mitchellbrine.achevementPacks.AchievementPacksMain;
-import mc.Mitchellbrine.achevementPacks.api.AchievementPack;
-import mc.Mitchellbrine.achevementPacks.api.CraftingAchievement;
-import mc.Mitchellbrine.achevementPacks.api.PickupAchievement;
-import mc.Mitchellbrine.achevementPacks.api.SmeltingAchievement;
+import mc.Mitchellbrine.achevementPacks.api.*;
 import mc.Mitchellbrine.achevementPacks.util.ErrorMessages;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.Achievement;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class AchievementEvents {
 
@@ -48,6 +48,27 @@ public class AchievementEvents {
                 PickupAchievement ach = (PickupAchievement) AchievementPacksMain.pickupAchievements.get(i);
                 if (event.pickedUp != null && event.pickedUp.getEntityItem() != null && event.pickedUp.getEntityItem().getItem() != null && ach.getEventItem() != null && event.pickedUp.getEntityItem().getItem() == ach.getEventItem()) {
                     event.player.addStat(ach,1);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void killEvent(LivingDeathEvent event) {
+        if (event.source != null && event.source.getEntity() != null) {
+            if (event.source.getEntity() instanceof EntityPlayer) {
+                for (int i = 0; i < AchievementPacksMain.killAchievements.size(); i++) {
+                    if (AchievementPacksMain.killAchievements.get(i) instanceof KillAchievement) {
+                        KillAchievement ach = (KillAchievement) AchievementPacksMain.killAchievements.get(i);
+
+                        if (event.entityLiving != null && ach.getEntity() != null && EntityList.getEntityString(event.entityLiving).equalsIgnoreCase(ach.getEntity())) {
+                            ((EntityPlayer) event.source.getEntity()).addStat(ach, 1);
+                        }
+                        else if (!EntityList.getEntityString(event.entityLiving).equalsIgnoreCase(ach.getEntity())) {
+                            ErrorMessages.compareError(ach.getEntity(), EntityList.getEntityString(event.entityLiving));
+                        }
+
+                    }
                 }
             }
         }
