@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Mod(modid = "AchievementPacks", name = "Achievement Packs", version = "1.0")
 public class AchievementPacksMain {
@@ -24,6 +25,7 @@ public class AchievementPacksMain {
 
     public static ArrayList<String> outdatedPacks = new ArrayList<String>();
     public static ArrayList<String> outdatedVersions = new ArrayList<String>();
+    public static HashMap<String,String> outdatedChangelog = new HashMap<String,String>();
     public static ArrayList<String> erroredPacks = new ArrayList<String>();
     public static ArrayList<AchievementPack> packs = new ArrayList<AchievementPack>();
 
@@ -34,6 +36,8 @@ public class AchievementPacksMain {
     public static ArrayList<Achievement> pickupAchievements = new ArrayList<Achievement>();
 
     public static ArrayList<Achievement> killAchievements = new ArrayList<Achievement>();
+
+    public static ArrayList<Achievement> statAchievements = new ArrayList<Achievement>();
 
     private boolean initTest;
     private boolean initMBrine;

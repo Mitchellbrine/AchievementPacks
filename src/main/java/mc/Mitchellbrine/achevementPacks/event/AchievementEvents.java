@@ -7,8 +7,10 @@ import mc.Mitchellbrine.achevementPacks.api.*;
 import mc.Mitchellbrine.achevementPacks.util.ErrorMessages;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class AchievementEvents {
 
@@ -72,6 +74,27 @@ public class AchievementEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void livingEvent(LivingEvent.LivingUpdateEvent event) {
+
+        if (event.entityLiving instanceof EntityPlayerMP) {
+
+            EntityPlayerMP player = (EntityPlayerMP) event.entityLiving;
+            for (int i = 0; i < AchievementPacksMain.statAchievements.size();i++) {
+                if (AchievementPacksMain.statAchievements.get(i) instanceof StatAchievement) {
+                    StatAchievement ach = (StatAchievement) AchievementPacksMain.statAchievements.get(i);
+
+                    if (player.func_147099_x().writeStat(ach.getEventStat()) >= ach.getStatAmount()) {
+                        player.addStat(ach,1);
+                    }
+
+                }
+            }
+
+        }
+
     }
 
 }
